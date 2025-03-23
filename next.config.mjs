@@ -18,6 +18,9 @@ const nextConfig = {
   },
   experimental: {
     // Disable all experimental features for stability
+    outputFileTracingExcludes: {
+      '/app/(main)/**/*': true
+    }
   },
   trailingSlash: false,
   assetPrefix: process.env.NODE_ENV === 'production' ? undefined : undefined,
