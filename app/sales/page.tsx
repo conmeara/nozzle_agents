@@ -1,6 +1,7 @@
 import { Wrench, Settings } from "lucide-react"
 import Link from "next/link"
 import { fetchAgents, fetchJobsByAgentType } from "@/lib/api"
+import { JobChatButton } from "@/components/JobChatButton"
 
 export default async function SalesPage() {
   // Fetch the sales agent and jobs data
@@ -57,39 +58,37 @@ export default async function SalesPage() {
 
       {/* Main content */}
       <div className="flex">
-        {/* Left sidebar - will be a shared component later */}
+        {/* Left sidebar */}
         <div className="w-48 p-4 space-y-4">
           <Link href="/" className="block">
-            <div className="flex items-center px-1 py-0.5 rounded-sm">
-              <span className="w-8 text-gray-400">00</span>
-              <span className="text-gray-300">Home</span>
+            <div className="flex items-center bg-black/20 px-1 py-0.5 rounded-sm">
+              <span>Home</span>
             </div>
           </Link>
-          {agents.map((agent, index) => (
-            <Link 
-              key={agent.id} 
-              href={`/${agent.type}`} 
-              className="block"
-            >
-              <div className={`flex items-center ${agent.type === 'sales' ? 'bg-black/20' : ''} px-1 py-0.5 rounded-sm`}>
-                {agent.type === 'sales' && <div className="w-2 h-2 bg-lime-400 rounded-full mr-1"></div>}
-                <span className={`w-8 ${agent.type === 'sales' ? 'text-lime-400' : 'text-gray-400'}`}>{`0${index + 1}`}</span>
-                <span className={agent.type === 'sales' ? 'text-lime-400' : 'text-gray-300'}>
-                  {agent.type.charAt(0).toUpperCase() + agent.type.slice(1)}
-                </span>
-                <span className={`ml-2 px-1.5 ${agent.type === 'sales' ? 'bg-lime-900 text-lime-400' : 'bg-gray-700'} rounded text-xs`}>
-                  {agent.total_jobs}
-                </span>
-              </div>
-            </Link>
-          ))}
-          <div className="flex items-center mt-4">
-            <span className="px-1.5 bg-gray-700 rounded text-xs mr-2">
-              {agents.reduce((sum, agent) => sum + agent.total_jobs, 0)}
-            </span>
-            <span className="text-gray-300">Jobs Total</span>
-          </div>
+          <Link href="/sales" className="block">
+            <div className="flex items-center bg-black/40 px-1 py-0.5 rounded-sm">
+              <span>Sales</span>
+            </div>
+          </Link>
+          <Link href="/marketing" className="block">
+            <div className="flex items-center bg-black/20 px-1 py-0.5 rounded-sm">
+              <span>Marketing</span>
+            </div>
+          </Link>
+          <Link href="/support" className="block">
+            <div className="flex items-center bg-black/20 px-1 py-0.5 rounded-sm">
+              <span>Support</span>
+            </div>
+          </Link>
+          <Link href="/research" className="block">
+            <div className="flex items-center bg-black/20 px-1 py-0.5 rounded-sm">
+              <span>Research</span>
+            </div>
+          </Link>
         </div>
+
+        {/* Sidebar divider */}
+        <div className="w-0.5 bg-black/20"></div>
 
         {/* Main content area */}
         <div className="flex-1 p-6">
@@ -108,10 +107,7 @@ export default async function SalesPage() {
               <div className="grid grid-cols-4 gap-4">
                 {leadGenJobs.map(job => (
                   <div key={job.id} className="flex flex-col items-center">
-                    <button 
-                      className={`w-16 h-16 ${job.status === 'active' ? 'bg-white' : 'bg-white/30'} rounded-full hover:bg-gray-200 transition-colors cursor-pointer mb-2`} 
-                      title={job.name}
-                    />
+                    <JobChatButton job={job} />
                     <span className="text-xs text-gray-300">{job.name}</span>
                   </div>
                 ))}
@@ -133,10 +129,7 @@ export default async function SalesPage() {
               <div className="grid grid-cols-3 gap-4">
                 {dealClosingJobs.map(job => (
                   <div key={job.id} className="flex flex-col items-center">
-                    <button 
-                      className={`w-16 h-16 ${job.status === 'active' ? 'bg-white' : 'bg-white/30'} rounded-full hover:bg-gray-200 transition-colors cursor-pointer mb-2`} 
-                      title={job.name}
-                    />
+                    <JobChatButton job={job} />
                     <span className="text-xs text-gray-300">{job.name}</span>
                   </div>
                 ))}
@@ -158,10 +151,7 @@ export default async function SalesPage() {
               <div className="grid grid-cols-2 gap-4">
                 {accountManagementJobs.map(job => (
                   <div key={job.id} className="flex flex-col items-center">
-                    <button 
-                      className={`w-16 h-16 ${job.status === 'active' ? 'bg-white' : 'bg-white/30'} rounded-full hover:bg-gray-200 transition-colors cursor-pointer mb-2`} 
-                      title={job.name}
-                    />
+                    <JobChatButton job={job} />
                     <span className="text-xs text-gray-300">{job.name}</span>
                   </div>
                 ))}
