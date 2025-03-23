@@ -16,13 +16,12 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  output: 'standalone',
   experimental: {
-    // Disable potentially problematic experimental features
-    // webpackBuildWorker: true,
-    // parallelServerBuildTraces: true,
-    // parallelServerCompiles: true,
+    // Disable all experimental features for stability
   },
+  runtime: 'nodejs',
+  trailingSlash: false,
+  assetPrefix: process.env.NODE_ENV === 'production' ? undefined : undefined,
 }
 
 mergeConfig(nextConfig, userConfig)
