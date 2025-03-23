@@ -1,13 +1,27 @@
 import { Wrench, Settings } from "lucide-react"
 import Link from "next/link"
-import { fetchAgents, fetchJobsByAgentType } from "@/lib/api"
 import { JobChatButton } from "@/components/JobChatButton"
+import { Job, AgentType } from "@/lib/types" 
 
-export default async function SalesPage() {
-  // Fetch the sales agent and jobs data
-  const agents = await fetchAgents();
-  const salesAgent = agents.find(agent => agent.type === 'sales');
-  const jobs = await fetchJobsByAgentType('sales');
+// Mock data instead of API fetches
+const mockAgents = [
+  { id: "1", name: 'Sales Agent', type: 'sales' as AgentType, status: 'active' }
+];
+
+const mockJobs: Job[] = [
+  { id: "1", name: 'LinkedIn Outreach', status: 'active', agent_id: "1", agent_type: 'sales', created_at: new Date().toISOString() },
+  { id: "2", name: 'Cold Email', status: 'active', agent_id: "1", agent_type: 'sales', created_at: new Date().toISOString() },
+  { id: "3", name: 'Lead Qualification', status: 'paused', agent_id: "1", agent_type: 'sales', created_at: new Date().toISOString() },
+  { id: "4", name: 'Demo Calls', status: 'active', agent_id: "1", agent_type: 'sales', created_at: new Date().toISOString() },
+  { id: "5", name: 'Proposal Generation', status: 'paused', agent_id: "1", agent_type: 'sales', created_at: new Date().toISOString() },
+  { id: "6", name: 'Check-ins', status: 'active', agent_id: "1", agent_type: 'sales', created_at: new Date().toISOString() },
+  { id: "7", name: 'Upsell Opportunities', status: 'paused', agent_id: "1", agent_type: 'sales', created_at: new Date().toISOString() },
+];
+
+export default function SalesPage() {
+  // Use mock data instead of API calls
+  const salesAgent = mockAgents.find(agent => agent.type === 'sales');
+  const jobs = mockJobs;
   
   // Group jobs by category for organization
   const leadGenJobs = jobs.filter(job => 

@@ -1,5 +1,7 @@
 import { Agent, Job, Activity } from './types';
 
+// Use relative URLs by default, only use environment variable if explicitly set
+// This ensures API calls work in both development and production
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || '';
 
 export async function fetchAgents(): Promise<Agent[]> {

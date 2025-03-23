@@ -19,7 +19,6 @@ const nextConfig = {
   experimental: {
     // Disable all experimental features for stability
   },
-  runtime: 'nodejs',
   trailingSlash: false,
   assetPrefix: process.env.NODE_ENV === 'production' ? undefined : undefined,
 }
