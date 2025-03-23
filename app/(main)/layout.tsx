@@ -1,6 +1,5 @@
-import { Navbar } from "@/components/navbar"
-import { MainSidebar } from "@/components/main-sidebar"
 import { fetchAgents } from "@/lib/api"
+import MainLayoutClient from "@/components/main-layout-client"
 
 export default async function MainLayout({
   children,
@@ -9,13 +8,5 @@ export default async function MainLayout({
 }) {
   const agents = await fetchAgents()
 
-  return (
-    <div className="flex min-h-screen flex-col">
-      <Navbar />
-      <div className="flex flex-1">
-        <MainSidebar agents={agents} />
-        <main className="flex-1">{children}</main>
-      </div>
-    </div>
-  )
+  return <MainLayoutClient agents={agents}>{children}</MainLayoutClient>
 } 
