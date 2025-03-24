@@ -1,5 +1,5 @@
 import { fetchAgents } from "@/lib/api"
-import MainLayoutClient from "@/components/main-layout-client"
+import { MainLayoutClient } from "@/components/main-layout-client"
 
 export default async function MainLayout({
   children,

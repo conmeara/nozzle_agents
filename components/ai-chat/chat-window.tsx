@@ -1,26 +1,26 @@
-"use client";
+'use client'
 
-import React, { useEffect, useRef } from 'react';
-import { Button } from "@/components/ui/button";
+import React, { useEffect, useRef } from 'react'
+import { useChat } from 'ai/react'
+import ReactMarkdown from 'react-markdown'
 import { 
   Dialog, 
   DialogContent, 
   DialogHeader, 
-  DialogTitle
-} from "@/components/ui/dialog";
-import { ChatItem, Job } from '@/lib/types';
-import { XIcon, SendIcon, Loader2 } from 'lucide-react';
-import ReactMarkdown from 'react-markdown';
-import { useChat } from 'ai/react';
+  DialogTitle 
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+import { XIcon, SendIcon, Loader2 } from 'lucide-react'
+import { Job } from '@/lib/types'
 
-interface ChatDialogProps {
-  isOpen: boolean;
-  onClose: () => void;
-  job: Job;
+interface ChatWindowProps {
+  isOpen: boolean
+  onClose: () => void
+  job: Job
 }
 
-export function ChatDialog({ isOpen, onClose, job }: ChatDialogProps) {
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+function ChatWindow({ isOpen, onClose, job }: ChatWindowProps) {
+  const messagesEndRef = useRef<HTMLDivElement>(null)
   
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
     api: '/api/chat',
@@ -29,12 +29,12 @@ export function ChatDialog({ isOpen, onClose, job }: ChatDialogProps) {
       agentType: job.agent_type,
     },
     initialMessages: [],
-  });
+  })
 
   // Scroll to bottom of chat when new messages arrive
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
   
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
@@ -101,8 +101,8 @@ export function ChatDialog({ isOpen, onClose, job }: ChatDialogProps) {
                     onChange={handleInputChange}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        handleSubmit(e as any);
+                        e.preventDefault()
+                        handleSubmit(e as any)
                       }
                     }}
                     style={{ height: 'auto', minHeight: '24px', maxHeight: '200px' }}
@@ -121,5 +121,7 @@ export function ChatDialog({ isOpen, onClose, job }: ChatDialogProps) {
         </div>
       </DialogContent>
     </Dialog>
-  );
-} 
+  )
+}
+
+export { ChatWindow } 

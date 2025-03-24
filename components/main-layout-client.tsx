@@ -4,7 +4,7 @@ import { Navbar } from "./navbar"
 import { MainSidebar } from "./main-sidebar"
 import { Agent } from "@/lib/types"
 
-export default function MainLayoutClient({
+function MainLayoutClient({
   children,
   agents,
 }: {
@@ -20,4 +20,6 @@ export default function MainLayoutClient({
       </div>
     </div>
   )
-} 
+}
+
+export { MainLayoutClient } 

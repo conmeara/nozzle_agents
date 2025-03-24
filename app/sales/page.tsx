@@ -1,6 +1,6 @@
 import { Wrench, Settings } from "lucide-react"
 import Link from "next/link"
-import { JobChatButton } from "@/components/JobChatButton"
+import { JobChatButton } from "@/components/job-chat-button"
 import { Job, AgentType } from "@/lib/types" 
 
 // Mock data instead of API fetches
